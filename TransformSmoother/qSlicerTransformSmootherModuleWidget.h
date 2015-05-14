@@ -25,6 +25,7 @@
 
 class qSlicerTransformSmootherModuleWidgetPrivate;
 class vtkMRMLNode;
+class vtkMRMLScene;
 
 /// \ingroup Slicer_QtModules_ExtensionTemplate
 class Q_SLICER_QTMODULES_TRANSFORMSMOOTHER_EXPORT qSlicerTransformSmootherModuleWidget :
@@ -40,11 +41,25 @@ public:
 
 public slots:
 
+  virtual void setMRMLScene( vtkMRMLScene* scene );
+  void onSceneImportedEvent();
+
+protected slots:
+
+  void onModuleNodeChanged();
+
+  void onUpdatingTransformTimeout();
+  void onFilterToggled(bool filter);
+  void onInputNodeChanged();
+  void onOutputNodeChanged();
+  void onCutOffFrequencyChanged(double cutoff);
+  void UpdateFromMRMLNode();
 
 protected:
   QScopedPointer<qSlicerTransformSmootherModuleWidgetPrivate> d_ptr;
 
   virtual void setup();
+  virtual void enter();
 
 private:
   Q_DECLARE_PRIVATE(qSlicerTransformSmootherModuleWidget);

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>525</width>
-    <height>319</height>
+    <height>234</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,13 +15,172 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="ctkCollapsibleButton" name="CTKCollapsibleButton" native="true">
-     <property name="text" stdset="0">
+    <widget class="ctkCollapsibleButton" name="CTKCollapsibleButton">
+     <property name="text">
       <string>Display</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <widget class="qSlicerTransformSmootherFooBarWidget" name="FooBar" native="true"/>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Input</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Output</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="qMRMLNodeComboBox" name="InputTransformComboBox">
+          <property name="nodeTypes">
+           <stringlist>
+            <string>vtkMRMLLinearTransformNode</string>
+           </stringlist>
+          </property>
+          <property name="addEnabled">
+           <bool>false</bool>
+          </property>
+          <property name="removeEnabled">
+           <bool>false</bool>
+          </property>
+          <property name="renameEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="qMRMLNodeComboBox" name="OutputTransformComboBox">
+          <property name="nodeTypes">
+           <stringlist>
+            <string>vtkMRMLLinearTransformNode</string>
+           </stringlist>
+          </property>
+          <property name="baseName">
+           <string>TransformSmootherFiltering</string>
+          </property>
+          <property name="renameEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="ActivateFilterCheckBox">
+        <property name="title">
+         <string>Filter</string>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <layout class="QGridLayout" name="gridLayout_2">
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>Smoother</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>Faster</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="ctkDoubleSpinBox" name="DoubleSpinBox">
+             <property name="maximumSize">
+              <size>
+               <width>70</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="minimum">
+              <double>1.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>50.000000000000000</double>
+             </property>
+             <property name="value">
+              <double>7.500000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0" colspan="2">
+            <widget class="ctkDoubleSlider" name="CutOffFrequencySlider">
+             <property name="value">
+              <double>7.500000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.500000000000000</double>
+             </property>
+             <property name="minimum">
+              <double>1.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>50.000000000000000</double>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="ctkCollapsibleButton" name="CollapsibleButton">
+     <property name="text">
+      <string>Advanced</string>
+     </property>
+     <property name="collapsed">
+      <bool>true</bool>
+     </property>
+     <property name="contentsFrameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Active module node:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="qMRMLNodeComboBox" name="ModuleNodeComboBox">
+        <property name="nodeTypes">
+         <stringlist>
+          <string>vtkMRMLTransformSmootherNode</string>
+         </stringlist>
+        </property>
+        <property name="renameEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -43,6 +202,11 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>qMRMLNodeComboBox</class>
+   <extends>QWidget</extends>
+   <header>qMRMLNodeComboBox.h</header>
+  </customwidget>
+  <customwidget>
    <class>qSlicerWidget</class>
    <extends>QWidget</extends>
    <header>qSlicerWidget.h</header>
@@ -55,12 +219,113 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>qSlicerTransformSmootherFooBarWidget</class>
+   <class>ctkDoubleSlider</class>
    <extends>QWidget</extends>
-   <header>qSlicerTransformSmootherFooBarWidget.h</header>
-   <container>1</container>
+   <header>ctkDoubleSlider.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkDoubleSpinBox</class>
+   <extends>QWidget</extends>
+   <header>ctkDoubleSpinBox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>qSlicerTransformSmootherModuleWidget</sender>
+   <signal>mrmlSceneChanged(vtkMRMLScene*)</signal>
+   <receiver>ModuleNodeComboBox</receiver>
+   <slot>setMRMLScene(vtkMRMLScene*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>146</x>
+     <y>278</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>287</x>
+     <y>220</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>qSlicerTransformSmootherModuleWidget</sender>
+   <signal>mrmlSceneChanged(vtkMRMLScene*)</signal>
+   <receiver>InputTransformComboBox</receiver>
+   <slot>setMRMLScene(vtkMRMLScene*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>156</x>
+     <y>229</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>117</x>
+     <y>52</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>qSlicerTransformSmootherModuleWidget</sender>
+   <signal>mrmlSceneChanged(vtkMRMLScene*)</signal>
+   <receiver>OutputTransformComboBox</receiver>
+   <slot>setMRMLScene(vtkMRMLScene*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>232</x>
+     <y>230</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>204</x>
+     <y>83</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>CutOffFrequencySlider</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>DoubleSpinBox</receiver>
+   <slot>setValueIfDifferent(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>389</x>
+     <y>146</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>490</x>
+     <y>148</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>DoubleSpinBox</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>CutOffFrequencySlider</receiver>
+   <slot>setValue(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>467</x>
+     <y>147</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>393</x>
+     <y>146</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>qSlicerTransformSmootherModuleWidget</sender>
+   <signal>mrmlSceneChanged(vtkMRMLScene*)</signal>
+   <receiver>ModuleNodeComboBox</receiver>
+   <slot>setMRMLScene(vtkMRMLScene*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>347</x>
+     <y>230</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>344</x>
+     <y>215</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

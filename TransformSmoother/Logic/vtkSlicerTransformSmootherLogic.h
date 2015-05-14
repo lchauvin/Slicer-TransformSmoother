@@ -28,12 +28,16 @@
 #include "vtkSlicerModuleLogic.h"
 
 // MRML includes
+#include "vtkMRMLLinearTransformNode.h"
+#include "vtkMRMLScene.h"
+#include "vtkMRMLTransformSmootherNode.h"
 
 // STD includes
 #include <cstdlib>
 
 #include "vtkSlicerTransformSmootherModuleLogicExport.h"
 
+class vtkMatrix4x4;
 
 /// \ingroup Slicer_QtModules_ExtensionTemplate
 class VTK_SLICER_TRANSFORMSMOOTHER_MODULE_LOGIC_EXPORT vtkSlicerTransformSmootherLogic :
@@ -45,6 +49,10 @@ public:
   vtkTypeMacro(vtkSlicerTransformSmootherLogic, vtkSlicerModuleLogic);
   void PrintSelf(ostream& os, vtkIndent indent);
 
+  void ProcessMRMLNodesEvents(vtkObject* caller, unsigned long event, void* callData);
+
+  void Filter(vtkMRMLTransformSmootherNode* tsNode);
+
 protected:
   vtkSlicerTransformSmootherLogic();
   virtual ~vtkSlicerTransformSmootherLogic();
@@ -55,6 +63,11 @@ protected:
   virtual void UpdateFromMRMLScene();
   virtual void OnMRMLSceneNodeAdded(vtkMRMLNode* node);
   virtual void OnMRMLSceneNodeRemoved(vtkMRMLNode* node);
+
+  void Slerp(double* result, double t, double* from, double* to, bool adjustSign = true);
+  void GetInterpolatedTransform(vtkMatrix4x4* itemAmatrix, vtkMatrix4x4* itemBmatrix,
+				double itemAweight, double itemBweight,
+				vtkMatrix4x4* interpolatedMatrix);
 private:
 
   vtkSlicerTransformSmootherLogic(const vtkSlicerTransformSmootherLogic&); // Not implemented

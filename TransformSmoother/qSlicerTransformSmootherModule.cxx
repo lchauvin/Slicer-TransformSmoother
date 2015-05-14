@@ -62,7 +62,7 @@ qSlicerTransformSmootherModule::~qSlicerTransformSmootherModule()
 //-----------------------------------------------------------------------------
 QString qSlicerTransformSmootherModule::helpText() const
 {
-  return "This is a loadable module that can be bundled in an extension";
+  return "This module smooth linear transforms by applying a low-pass filter";
 }
 
 //-----------------------------------------------------------------------------
@@ -75,7 +75,7 @@ QString qSlicerTransformSmootherModule::acknowledgementText() const
 QStringList qSlicerTransformSmootherModule::contributors() const
 {
   QStringList moduleContributors;
-  moduleContributors << QString("John Doe (AnyWare Corp.)");
+  moduleContributors << QString("Laurent Chauvin (BWH), Jayender Jagadeesan (BWH), Andras Lasso (Queen's University)");
   return moduleContributors;
 }
 
@@ -88,7 +88,7 @@ QIcon qSlicerTransformSmootherModule::icon() const
 //-----------------------------------------------------------------------------
 QStringList qSlicerTransformSmootherModule::categories() const
 {
-  return QStringList() << "Examples";
+  return QStringList() << "IGT";
 }
 
 //-----------------------------------------------------------------------------
